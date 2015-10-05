@@ -5,7 +5,8 @@
 #
 
 # Pull base image.
-FROM dockerfile/java:oracle-java8
+FROM java:8
+
 
 ENV ES_PKG_NAME elasticsearch-1.5.0
 
@@ -15,7 +16,9 @@ RUN \
   wget https://download.elasticsearch.org/elasticsearch/elasticsearch/$ES_PKG_NAME.tar.gz && \
   tar xvzf $ES_PKG_NAME.tar.gz && \
   rm -f $ES_PKG_NAME.tar.gz && \
-  mv /$ES_PKG_NAME /elasticsearch
+  mv /$ES_PKG_NAME /elasticsearch && \
+  /elasticsearch/bin/plugin -install mobz/elasticsearch-head && \
+  /elasticsearch/bin/plugin -install lukas-vlcek/bigdesk
 
 # Define mountable directories.
 VOLUME ["/data"]
