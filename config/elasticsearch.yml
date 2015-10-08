@@ -5,3 +5,4 @@ path:
   work: /data/work
   
 discovery.zen.ping.multicast: false
+node.local: true
